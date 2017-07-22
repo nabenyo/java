@@ -1,0 +1,11 @@
+package testing_package;
+
+public class Point {
+	public double x;
+	public double y;
+	public double getR() {
+		return Math.sqrt(x*x + y*y);
+	}
+	
+
+}

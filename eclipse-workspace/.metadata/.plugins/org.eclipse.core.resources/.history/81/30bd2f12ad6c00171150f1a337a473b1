@@ -1,0 +1,14 @@
+package benyon_lab3;
+
+public class GameRound {
+
+	public static void main(String[] args) {
+		GuessGame round1 = new GuessGame();
+		round1.newTarget();
+		round1.checkAnswer();
+		round1.newTarget();
+		round1.checkAnswer();
+
+	}
+
+}

@@ -1,0 +1,34 @@
+package benyon_lab3;
+
+import java.util.Random;
+
+public class GuessGame {
+	private int ActualNumber;
+	private int guesses;
+	private int GuessedNumber;
+
+	public GuessGame(int ActualNumber, int guesses,  int GuessedNumber) {
+		this.ActualNumber = ActualNumber;
+		this.guesses = guesses;
+		this.GuessedNumber = GuessedNumber;		
+	}
+	
+	public GuessGame() {
+		this(0,0,0);
+	}
+	
+	public void displayStatistics() {
+		System.out.println(guesses);
+	}
+	
+	public void newTarget() {
+		Random rand = new Random();
+		ActualNumber = rand.nextInt(100);
+	}
+	
+	public boolean Guess(int num) {
+		return num == this.ActualNumber;
+	}
+	
+	
+}

@@ -1,0 +1,58 @@
+package benyon_lab3;
+
+import java.util.Random;
+
+public class GuessGame {
+	private int actualNumber;
+	private int guesses;
+	private int rangeMaximum;
+	private int rangeMinimum;
+
+	public GuessGame(int guesses, int RangeMinimum,int RangeMaximum) {
+		this.guesses = guesses;	
+		this.rangeMinimum = RangeMinimum;
+		this.rangeMaximum = RangeMaximum;
+		newTarget();
+	}
+	
+	public GuessGame() {
+		this(0,100,200);
+		newTarget();
+	}
+	
+	public void displayStatistics() {
+		System.out.println(guesses);
+	}
+	
+	public void newTarget() {
+		Random rand = new Random();
+		System.out.println(this.actualNumber);
+		this.actualNumber = this.rangeMinimum + rand.nextInt(this.rangeMaximum - this.rangeMinimum);
+	}
+	
+	public boolean Guess(int num) {
+		displayHint(num);
+		return num == this.actualNumber;
+	}
+	
+	public int getRangeMinimum() {
+		return rangeMinimum;
+	}
+	
+	public int getRangeMaximum() {
+		return rangeMaximum;
+	}
+	
+	public void checkAnswer() {
+		System.out.println(actualNumber);
+	}
+	
+	private void displayHint(int num) {
+		if(num > actualNumber){
+			System.out.printf("%d is too high\n", num);
+		} else if(num < actualNumber){
+			System.out.printf("%d is too high\n", num);
+		}
+	}
+	
+}

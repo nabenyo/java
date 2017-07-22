@@ -1,0 +1,16 @@
+package testing_package;
+
+public class PointDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Point p1 = new Point(1.0, 1.0);
+		Point p2 = new Point(-1.0, 1.1);
+		
+		System.out.printf("Point(x=%f,y=%f)\n", p1.getX(), p1.getY());
+		System.out.printf("r=%f, theta=%f\n", p1.getR(), p1.getTheta());
+		System.out.printf("Point(x=%f,y=%f)", p2.getX(), p2.getY());
+
+	}
+
+}

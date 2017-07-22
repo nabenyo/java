@@ -1,0 +1,30 @@
+package benyon_lab3;
+
+import java.util.Scanner;
+
+public class GameRound {
+	GuessGame rounds = new GuessGame(0,100,500);
+	
+	public void main(String[] args) {
+
+		welcome();
+		roundPrint(rounds.getRangeMinimum(), rounds.getRangeMinimum());
+		
+	}
+	
+	public static void welcome() {
+		System.out.print("This is a guessing game where you will guess a"
+				+ "number and I tell you if it is too low or too high.");
+	}
+	
+	public static void roundPrint(int min, int max) {
+		System.out.printf("Guess a number between %d and %d", min, max);
+	}
+	
+	public void captureGuess() {
+		Scanner userInput = new Scanner(System.in);
+		rounds.Guess(userInput.nextInt());
+		
+	}
+
+}

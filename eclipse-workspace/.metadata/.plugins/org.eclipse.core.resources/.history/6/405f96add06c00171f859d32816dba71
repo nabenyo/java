@@ -1,0 +1,86 @@
+/*
+ * Nick Benyo
+ * CPSC 5002, Seattle University
+ * This is free and unencumbered software released into the public domain.
+ */
+
+package benyon_lab2;
+
+import java.util.Scanner;
+
+/**
+ * Executes a simple dice game. Allows the user to play ten rounds
+ * of six sided dice rolling against the computer. The highest
+ * number wins the round. At the end of ten rounds, the player
+ * who wins the most rounds is game winner.
+ * @author Nick Benyo
+ *
+ */
+public class DiceGame {
+
+	public static void main(String[] args) {
+		//LoadedDie die1 = new LoadedDie();
+		BeginGame();
+		}
+	
+	/**
+	 * Iterates through the dice rolling game, playing
+	 * through ten matches
+	 */
+	public static void BeginGame() {
+		LoadedDie cpuDie = new LoadedDie(6,30);
+		LoadedDie userDie = new LoadedDie(1,30);
+		int CpuScore = 0;//CPU score counter
+		int UserScore = 0;//User score counter
+		int Tie = 0;
+		for(int i = 1; i < 11; i++) {
+			cpuDie.roll();
+			userDie.roll();
+			roundPrint(i, cpuDie.getResult(), userDie.getResult());
+			if(userDie.getResult() > cpuDie.getResult();) {
+				UserScore+=1;
+			}else if (cpuDie.getResult() > userDie.getResult()) {
+				CpuScore+=1;
+			}else {
+				Tie+=1;
+			}
+		}
+		System.out.printf("I won %d times\n", CpuScore);
+		System.out.printf("You won %d times\n", UserScore);
+		System.out.printf("We tied %d times\n", Tie);
+		System.out.printf(winner(UserScore, CpuScore));
+	}
+	
+	/**
+	 * Compares scores and declares a winner
+	 * @param User The integer score of the User
+	 * @param Cpu The integer score of the CPU
+	 * @return A string variable declaring the game winner
+	 */
+	public static String winner(int User, int Cpu) {
+		
+		if(User > Cpu) {
+			return "You are the winner!";
+		} else if(Cpu > User) {
+			return "I am the winner!";
+		} else {
+			return "It's a tie!";
+		}
+	}
+	
+	/**
+	 * Round print to console text for the dice game
+	 * @param RoundNum A counter for the current game round
+	 * @param CpuRoll The roll result of CPU/Player 1
+	 * @param UserRoll The roll result of User/Player 2
+	 */
+	public static void roundPrint(int RoundNum, int CpuRoll, int UserRoll) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.printf("Roll %d out of 10\n", RoundNum);
+		System.out.printf("I rolled a %d\n", CpuRoll);	
+		System.out.printf("Ready to roll? (Press ENTER when ready)");
+		scanner.nextLine();
+		System.out.printf("You rolled a %d\n\n", UserRoll);	
+	}
+	
+}

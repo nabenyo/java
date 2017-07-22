@@ -1,0 +1,11 @@
+package testing_package;
+
+public class Class0 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.print("hello");
+
+	}
+
+}

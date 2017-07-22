@@ -1,0 +1,42 @@
+package benyon_lab2;
+
+import java.util.Random;
+
+/**
+* The constructor performs an initial roll of the die.
+* @param loadedNumber        which number should come up more often
+* @param moreTimesPerHundred how many times per 100 rolls to come up with 
+*                            the loaded number (instead of uniform random)
+*/
+public class LoadedDie {
+	private int loadedNumber;
+	private int moreTimesPerHundred;
+	
+	public LoadedDie() {
+		this(6,70);
+	}
+	public LoadedDie(int loadedNumber, int moreTimesPerHundred) {
+		this.loadedNumber = loadedNumber;
+		this.moreTimesPerHundred = moreTimesPerHundred;
+	}
+	
+	 /**
+	 * The roll method simulates the rolling of the die.
+	 * It will typically set this die's value to a random value
+	 * with uniform distribution between 1 and 6. Occasionally,
+	 * it will a priori return the favored value (with frequency
+	 * determined by the moreTimesPerHundred argument that was passed
+	 * to the constructor).
+	 */
+	public int roll() {
+		Random randomNumbers = new Random();
+		int number = randomNumbers.nextInt(6)+1;
+		int loadedProbability = randomNumbers.nextInt(100);
+		if (loadedProbability > this.moreTimesPerHundred) {
+			return number;
+		}
+		else {
+			return loadedNumber;
+		}
+	}
+}

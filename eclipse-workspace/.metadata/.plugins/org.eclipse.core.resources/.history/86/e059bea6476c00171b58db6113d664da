@@ -1,0 +1,18 @@
+package benyon_lab2;
+
+public class DiceGame {
+
+	public static void main(String[] args) {
+		//LoadedDie die1 = new LoadedDie();
+		BeginGame();
+		}	
+	public static void BeginGame() {
+		for(int i = 1; i < 11; i++) {
+			System.out.printf("Roll %d out of 10\n", i);	
+			System.out.printf("I rolled a %d\n", i);	
+			System.out.printf("Ready to roll? (Press ENTER when ready)", i);
+			System.out.printf("You rolled a %d\n", i);	
+		}
+	}
+
+}

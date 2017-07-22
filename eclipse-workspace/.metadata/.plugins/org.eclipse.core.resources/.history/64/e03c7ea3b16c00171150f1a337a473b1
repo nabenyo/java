@@ -1,0 +1,43 @@
+package benyon_lab2;
+
+import java.util.Random;
+
+public class LoadedDie {
+	private int sides = 6;
+	
+	public void SetSides(int sides) {
+		this.sides = sides;
+	}
+	
+	public int getSides() {
+		return sides;
+	}
+	
+	public int roll() {
+		Random randomNumbers = new Random();
+		int number = randomNumbers.nextInt(this.sides)+1;
+		return number;
+	}
+	
+	public int Loaded() {
+		Random randomNumber = new Random();
+		int number = randomNumber.nextInt(100);
+		if (number < 70) {
+			return this.roll();
+		}
+		else {
+			return 6;
+		}
+	}
+	
+	public int Lacking() {
+		Random randomNumber = new Random();
+		int number = randomNumber.nextInt(100);
+		if (number < 70) {
+			return this.roll();
+		}
+		else {
+			return 1;
+		}
+	}
+}

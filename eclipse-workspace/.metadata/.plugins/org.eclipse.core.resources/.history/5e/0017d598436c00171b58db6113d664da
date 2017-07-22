@@ -1,0 +1,12 @@
+package benyon_lab2;
+
+public class DiceGame {
+
+	public static void main(String[] args) {
+		LoadedDie die1 = new LoadedDie();
+	die1.DiceMake(10);
+	System.out.print(die1.getSides());
+
+	}
+
+}

@@ -1,0 +1,24 @@
+package benyon_lab2;
+
+import java.util.Scanner;
+
+public class DiceGame {
+
+	public static void main(String[] args) {
+		//LoadedDie die1 = new LoadedDie();
+		BeginGame();
+		}	
+	public static void BeginGame() {
+		LoadedDie Die = new LoadedDie();
+		Scanner scanner = new Scanner(System.in);
+		for(int i = 1; i < 11; i++) {
+			System.out.printf("Roll %d out of 10\n", i);	
+			System.out.printf("I rolled a %d\n", Die.Loaded());	
+			System.out.printf("Ready to roll? (Press ENTER when ready)\n");
+			scanner.nextLine();
+			System.out.printf("You rolled a %d\n\n", Die.Lacking());	
+		}
+	}
+
+}
+

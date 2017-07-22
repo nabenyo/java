@@ -1,0 +1,39 @@
+package benyon_lab3;
+
+import java.util.Random;
+
+public class GuessGame {
+	private int ActualNumber;
+	private int guesses;
+	private int RangeMaximum;
+	private int RangeMinimum;
+
+	public GuessGame(int ActualNumber, int guesses, int RangeMaximum,
+			int RangeMinimum) {
+		this.ActualNumber = ActualNumber;
+		this.guesses = guesses;	
+		this.RangeMinimum = RangeMinimum;
+		this.RangeMaximum = RangeMaximum;
+	}
+	
+	public GuessGame() {
+		this(0,0,0,100);
+	}
+	
+	public void displayStatistics() {
+		System.out.println(guesses);
+	}
+	
+	public void newTarget() {
+		Random rand = new Random();
+		ActualNumber = RangeMinimum + rand.nextInt(RangeMaximum);
+	}
+	
+	public boolean Guess(int num) {
+		return num == this.ActualNumber;
+	}
+	
+	public void checkAnswer() {
+		System.out.println(ActualNumber);
+	}
+}

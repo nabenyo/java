@@ -1,0 +1,39 @@
+package benyon_p1;
+
+import java.util.Random;
+
+public class P1 {
+
+	public static void main(String[] args) {
+		TicTacToe testarray = new TicTacToe(3);
+		print(testarray.getBoard());
+	}
+	public static void print(String[][] newlist) {
+		//Loop to print through the array
+		System.out.print(" 0   1  2\n");
+		for (int row = 0; row < newlist.length; row++) {
+			//If statement to start a new line with each new row
+			if(row>0) {
+				System.out.println();}
+			//Create totaled variable
+			int total = 0;
+			//Loop through each value in the array
+			for (int col = 0; col < newlist[row].length; col++) {
+				//Create indent with each row for diagonals total
+				if(col==0 && row >= 1) {
+					String lines = new String(new char[3]).replace("\0", "---");
+					System.out.print("  "+lines+"\n");
+				}
+				if(col==0) {
+					System.out.print(row);
+				}
+				System.out.printf(" ");
+				System.out.printf("%s|",newlist[row][col]);
+				//If the end of the row, print out the totaled variable
+			}
+			String lines = new String(new char[3]).replace("\0", "---");
+		}
+		String lines = new String(new char[4]).replace("\0", "---");
+		System.out.print("\n "+lines+"\n");
+	}
+}

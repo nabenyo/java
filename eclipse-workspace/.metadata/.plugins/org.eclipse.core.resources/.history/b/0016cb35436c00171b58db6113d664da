@@ -1,0 +1,10 @@
+package benyon_lab2;
+
+public class DiceGame {
+
+	public static void main(String[] args) {
+		LoadedDie die1 = new LoadedDie();
+
+	}
+
+}

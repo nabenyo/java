@@ -1,0 +1,35 @@
+package testing_package;
+
+public class Point {
+	public double x;
+	public double y;
+	
+	public Point(double xCoord, double yCoord) {
+		x = xCoord;
+		y = yCoord;
+	}
+	
+	public Point() {
+		x = 1.0;
+		y = 1.0;
+	}
+	
+	/**
+	 * Get the distance coordinate in polar system
+	 * @return the distance from the origin
+	 */
+	public double getR() {
+		return Math.sqrt(x*x + y*y);
+	}
+	
+	/**
+	 * Get the angle coordinate in polar system.
+	 * @return the angle in radians counterclockwise from east
+	 * within range
+	 */ 
+	public double getTheta() {
+		return Math.atan2(y,x);
+	}
+	
+
+}

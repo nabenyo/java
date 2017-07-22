@@ -1,0 +1,31 @@
+package benyon_lab2;
+
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+public class DiceGame {
+
+	public static void main(String[] args) {
+		//LoadedDie die1 = new LoadedDie();
+		BeginGame();
+		}	
+	public static void BeginGame() {
+		LoadedDie Die = new LoadedDie();
+		Scanner scanner = new Scanner(System.in);
+		TimeUnit TimeUnit = new TimeUnit();
+		for(int i = 1; i < 11; i++) {
+			Thread.sleep(4000);
+			System.out.printf("Roll %d out of 10\n", i);
+			Thread.sleep(4000);
+			System.out.printf("I rolled a %d\n", Die.Loaded());	
+			Thread.sleep(4000);
+			System.out.printf("Ready to roll? (Press ENTER when ready)");
+			scanner.nextLine();
+			Thread.sleep(4000);
+			System.out.printf("You rolled a %d\n\n", Die.Lacking());	
+		}
+	}
+
+}
+
+
