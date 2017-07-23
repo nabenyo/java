@@ -15,11 +15,13 @@ public class P1 {
 			System.out.print("\nDo you want to play again?\n");
 			keepPlaying = scanner.nextLine();
 		}
+		System.out.print("Thank you for playing!");
 	}
 	
 	public static void gamePlay() {
 		TicTacToe array = new TicTacToe();
-		String gameWinner = "O";
+		String gameWinner = "Tie";
+		int rounds = 0;
 		boolean over = false;
 		while(over == false) {
 			over = round(array, "X");
@@ -27,15 +29,30 @@ public class P1 {
 				gameWinner = "X";
 				break;
 			}
+			rounds++;
+			if(rounds == 9) {
+				break;
+			}
 			over = round(array, "0");
+			if(over == true) {
+				gameWinner = "O";
+				break;
+			}
+			rounds++;
 		}
 		if(gameWinner == "O") {
 			owins += 1;
 		}else if(gameWinner == "X") {
 			xwins += 1;
 		}
-		System.out.printf("%s wins the game!\n", gameWinner);
+		printBoard(array.getBoard());
+		if(gameWinner!="Tie") {
+			System.out.printf("%s wins the game!\n", gameWinner);
+		}else{
+			System.out.print("No one wins, it's a tie!\n");
+			}
 	}
+	
 	public static boolean round(TicTacToe array, String xOrY) {
 		printBoard(array.getBoard());
 		System.out.printf("\n%s, it is your turn.\n", xOrY);
@@ -44,22 +61,25 @@ public class P1 {
 	}
 	
 	public static void aPlayerMove(TicTacToe array, String xOrY) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Which row?");
-		int row = scanner.nextInt();
-		while(row >= array.getBoard().length||row<0) {
-			System.out.println("\nThat number isn't on the board! "
-					+ "Please try again\n");
-			row = scanner.nextInt();
-		}
-		System.out.print("Which column?");
-		int column = scanner.nextInt();
-		while(column >= array.getBoard().length||column<0) {
-			System.out.println("\nThat number isn't on the board! "
-					+ "Please try again\n");
-			column = scanner.nextInt();
-		}
-		array.playerMove(row, column, xOrY);
+		boolean correctAnswer = false;
+			while(correctAnswer == false) {
+				Scanner scanner = new Scanner(System.in);
+				System.out.print("Which row?");
+				int row = scanner.nextInt();
+				while(row >= array.getBoard().length||row<0) {
+					System.out.println("\nThat number isn't on the board! "
+							+ "Please try again\n");
+					row = scanner.nextInt();
+				}
+				System.out.print("Which column?");
+				int column = scanner.nextInt();
+				while(column >= array.getBoard().length||column<0) {
+					System.out.println("\nThat number isn't on the board! "
+							+ "Please try again\n");
+					column = scanner.nextInt();
+				}
+				correctAnswer = array.playerMove(row, column, xOrY);
+			}
 	}
 	
 	public static void printBoard(String[][] newlist) {

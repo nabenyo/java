@@ -33,12 +33,15 @@ public class TicTacToe {
 		return this.gameBoard;
 	}
 	
-	public void playerMove(int row, int col, String val) {
+	public boolean playerMove(int row, int col, String val) {
+		boolean valid = true;
 		if (this.gameBoard[row][col] == " ") {
 			this.gameBoard[row][col] = val;
 		}else {
 			System.out.print("That space is already taken!\n");
+			valid = false;
 		}
+		return valid;
 	}
 	
 	public boolean win(String player) {
