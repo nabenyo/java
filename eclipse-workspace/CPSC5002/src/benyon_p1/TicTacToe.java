@@ -4,20 +4,32 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class TicTacToe {
-	private String[][] gameBoard;
-
-	public TicTacToe(int A) {
-		this.gameBoard = array(A);
+	private String[][] gameBoard;//measures
+	
+	/**
+	 * Initializes TicTacToe object, will build an array used to track the game
+	 * @param size the size of the game-board/array
+	 */
+	public TicTacToe(int size) {
+		this.gameBoard = array(size);
 	}
 	
+	/**
+	 * Overloaded constructor, defaults to 3X3 game-board
+	 */
 	public TicTacToe() {
 		this.gameBoard = array(3);
 	}
 	
-	public static String[][] array(int A) {
+	/**
+	 * Array, builds the array used for the game-board data member
+	 * @param size of the array initialized
+	 * @return Returns a size x size array
+	 */
+	public static String[][] array(int size) {
 		Random randomNumbers = new Random();
-		int ROWS = A;
-		int COLS = A;
+		int ROWS = size;
+		int COLS = size;
 		String[][] x  = new String[ROWS][COLS];
 		//Nested loop assigning random numbers to each value in the array
 		for (int row = 0; row < ROWS; row++){		
@@ -29,14 +41,27 @@ public class TicTacToe {
 		return x;
 	}
 	
+	/**
+	 * Used as a getter for the game-board data member
+	 * @return the game-board array data member
+	 */
 	public String[][] getBoard(){
 		return this.gameBoard;
 	}
 	
-	public boolean playerMove(int row, int col, String val) {
+	/**
+	 * Use to execute a move for a player. Will print to terminal if 
+	 * the space has already been taken and return a boolean indicating
+	 * if the move is valid.
+	 * @param row the row of the 2D game-board array to be filled
+	 * @param col the column of the 2D game-board array to be filled
+	 * @param player a string value representing the player (X or O)
+	 * @return Returns a boolean indicating if the move was valid
+	 */
+	public boolean playerMove(int row, int col, String player) {
 		boolean valid = true;
 		if (this.gameBoard[row][col] == " ") {
-			this.gameBoard[row][col] = val;
+			this.gameBoard[row][col] = player;
 		}else {
 			System.out.print("That space is already taken!\n");
 			valid = false;
@@ -44,6 +69,12 @@ public class TicTacToe {
 		return valid;
 	}
 	
+	/**
+	 * Use to determine if a winning configuration exists on the game-board
+	 * @param player a string of the player/value on the board (X or O)
+	 * @return a boolean value indicating whether or not the player passed
+	 * through is a winner
+	 */
 	public boolean win(String player) {
 		boolean winner = false;
 		if (diagWin(player)||rowWin(player)|| colWin(player) == true) {
@@ -52,6 +83,11 @@ public class TicTacToe {
 		return winner;
 	}
 	
+	/**
+	 * Evaluates if a win has occurred on the row level
+	 * @param player a string of the player/value on the board (X or O)
+	 * @return a boolean value indicating if the player has won on a row level
+	 */
 	public boolean rowWin(String player) {
 		boolean rowwinner = false;
 		boolean win = true;
@@ -75,6 +111,11 @@ public class TicTacToe {
 		return rowwinner;
 	}
 	
+	/**
+	 * Evaluates if a win has occurred on the column level
+	 * @param player a string of the player/value on the board (X or O)
+	 * @return a boolean value indicating if the player has won on a row level
+	 */
 	public boolean colWin(String player) {
 		boolean colwinner = false;
 		boolean win = true;
@@ -98,6 +139,11 @@ public class TicTacToe {
 		return colwinner;
 	}
 	
+	/**
+	 * Evaluates if a win has occurred on the diagonal level
+	 * @param player a string of the player/value on the board (X or O)
+	 * @return a boolean value indicating if the player has won on a diagonal level
+	 */
 	public boolean diagWin(String player) {
 		boolean[] passfail = new boolean[2];
 		boolean winner = false;
