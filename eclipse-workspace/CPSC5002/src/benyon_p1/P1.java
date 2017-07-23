@@ -1,20 +1,68 @@
 package benyon_p1;
 
-import java.util.Random;
+import java.util.Scanner;
 
 public class P1 {
-
+	private static int owins = 0;
+	private static int xwins = 0;
+	
 	public static void main(String[] args) {
-		TicTacToe testarray = new TicTacToe(3);
-		print(testarray.getBoard());
-		testarray.playerMove(0, 0, "X");
-		print(testarray.getBoard());
-		testarray.playerMove(1, 0, "X");
-		print(testarray.getBoard());
-		testarray.playerMove(2, 0, "X");
-		print(testarray.getBoard());
+		Scanner scanner = new Scanner(System.in);
+		String keepPlaying = "y";
+		while(keepPlaying.equals("y")) {
+			gamePlay();
+			System.out.printf("\nX has %d wins\nO has %d wins\n", xwins, owins);
+			System.out.print("\nDo you want to play again?\n");
+			keepPlaying = scanner.nextLine();
+		}
 	}
-	public static void print(String[][] newlist) {
+	
+	public static void gamePlay() {
+		TicTacToe array = new TicTacToe();
+		String gameWinner = "O";
+		boolean over = false;
+		while(over == false) {
+			over = round(array, "X");
+			if(over == true) {
+				gameWinner = "X";
+				break;
+			}
+			over = round(array, "0");
+		}
+		if(gameWinner == "O") {
+			owins += 1;
+		}else if(gameWinner == "X") {
+			xwins += 1;
+		}
+		System.out.printf("%s wins the game!\n", gameWinner);
+	}
+	public static boolean round(TicTacToe array, String xOrY) {
+		printBoard(array.getBoard());
+		System.out.printf("\n%s, it is your turn.\n", xOrY);
+		aPlayerMove(array, xOrY);
+		return array.win(xOrY);
+	}
+	
+	public static void aPlayerMove(TicTacToe array, String xOrY) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Which row?");
+		int row = scanner.nextInt();
+		while(row >= array.getBoard().length||row<0) {
+			System.out.println("\nThat number isn't on the board! "
+					+ "Please try again\n");
+			row = scanner.nextInt();
+		}
+		System.out.print("Which column?");
+		int column = scanner.nextInt();
+		while(column >= array.getBoard().length||column<0) {
+			System.out.println("\nThat number isn't on the board! "
+					+ "Please try again\n");
+			column = scanner.nextInt();
+		}
+		array.playerMove(row, column, xOrY);
+	}
+	
+	public static void printBoard(String[][] newlist) {
 		//Loop to print through the array
 		int lenvar = newlist[0].length;
 		for(int rowlen = 0; rowlen < lenvar; rowlen++) {
