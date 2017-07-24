@@ -1,24 +1,42 @@
 package benyon_p1;
 
-import java.util.Random;
-import java.util.Arrays;
 
+/**
+ * TicTacToe class generates an object with a string array used 
+ * for playing tic-tac-toe. Contains classes for marking moves 
+ * in the array, and for testing rows, columns, and diagonals 
+ * to determin if a win has occurred. Wins result in a true boolean
+ * @author Nick Benyo
+ *
+ */
 public class TicTacToe {
-	private String[][] gameBoard;//measures
+	private String[][] gameBoard;//An array used to track the values in game
+	private int boardSize = 3;//The size of the gameboard (n X n)
 	
 	/**
-	 * Initializes TicTacToe object, will build an array used to track the game
+	 * Initializes TicTacToe object, will build an array 
+	 * used to track the game
 	 * @param size the size of the game-board/array
 	 */
-	public TicTacToe(int size) {
-		this.gameBoard = array(size);
+	public TicTacToe() {
+		this.gameBoard = array(boardSize);
 	}
 	
 	/**
-	 * Overloaded constructor, defaults to 3X3 game-board
+	 * Setter to change board size variable and reinitialize board
+	 * @param size The square size of the board
 	 */
-	public TicTacToe() {
-		this.gameBoard = array(3);
+	public void setBoardSize(int size) {
+		this.boardSize = size;
+		this.gameBoard = array(boardSize);
+	}
+	
+	/**
+	 * Getter for size of board. 
+	 * @return Integer value of board size (n X n)
+	 */
+	public int getBoardSize() {
+		return this.boardSize;
 	}
 	
 	/**
@@ -27,7 +45,6 @@ public class TicTacToe {
 	 * @return Returns a size x size array
 	 */
 	public static String[][] array(int size) {
-		Random randomNumbers = new Random();
 		int ROWS = size;
 		int COLS = size;
 		String[][] x  = new String[ROWS][COLS];
@@ -35,10 +52,10 @@ public class TicTacToe {
 		for (int row = 0; row < ROWS; row++){		
 			for (int col = 0; col < COLS; col++) {
 				String blanks = " ";
-				x[row][col] = blanks;
+				x[row][col] = blanks;//Assigns blank space array positions
 			}
 		}
-		return x;
+		return x;//finalized array with blank space
 	}
 	
 	/**
@@ -95,20 +112,25 @@ public class TicTacToe {
 		for (int row = 0; row < this.gameBoard.length; row++) {
 			win = true;
 			for (int col = 0; col < this.gameBoard[row].length; col++) {
+				//Compares every value in row to player value
 				if(player!= this.gameBoard[row][col]) {
+					//win becomes false if a mismatch occurs in row
 					win = false;
 				}
 			}
+			//adds win boolean to the passfail array
 			passfail[row] = win;
 		}
+		//for loop iterates through every value of passfail looking for
+		//a true value (true = a win)
 		for(boolean gameover:passfail) {
 			if (gameover == true) {
-				//System.out.println(gameover);
+				//Assigns a true to rowwinner of a true value is found
 				rowwinner = true;
 				break;
 			}
 		}
-		return rowwinner;
+		return rowwinner;//Returns a boolean if there was a row win at any point
 	}
 	
 	/**
@@ -117,6 +139,9 @@ public class TicTacToe {
 	 * @return a boolean value indicating if the player has won on a row level
 	 */
 	public boolean colWin(String player) {
+		/*Functions nearly the same as rowWin but inverted to test
+		 *  column wins instead of rows
+		 */
 		boolean colwinner = false;
 		boolean win = true;
 		boolean[] passfail = new boolean[this.gameBoard.length];
@@ -131,7 +156,6 @@ public class TicTacToe {
 		}
 		for(boolean gameover:passfail) {
 			if (gameover == true) {
-				//System.out.println(gameover);
 				colwinner = true;
 				break;
 			}
@@ -142,15 +166,16 @@ public class TicTacToe {
 	/**
 	 * Evaluates if a win has occurred on the diagonal level
 	 * @param player a string of the player/value on the board (X or O)
-	 * @return a boolean value indicating if the player has won on a diagonal level
+	 * @return a boolean value indicating if the 
+	 * player has won on a diagonal level
 	 */
 	public boolean diagWin(String player) {
 		boolean[] passfail = new boolean[2];
 		boolean winner = false;
 		boolean win = true;
 		int rdiag = this.gameBoard.length-1;
+		//Loops to test diagonal from bottom left to top right
 		for (int diag = 0; diag < this.gameBoard.length; diag++) {
-			//System.out.print(this.gameBoard[diag][rdiag]);
 			if(player!= this.gameBoard[diag][rdiag]) {
 				win = false;
 			}
@@ -158,7 +183,7 @@ public class TicTacToe {
 		}
 		passfail[0] = win;
 		win = true;
-		int d2_total = 0;
+		//Loops to test diagonal from top left to bottom right
 		for (int diag = 0; diag < this.gameBoard.length; diag++) {
 			if(player!= this.gameBoard[diag][diag]) {
 				win = false;
@@ -167,7 +192,6 @@ public class TicTacToe {
 		passfail[1] = win;
 		for(boolean gameover:passfail) {
 			if (gameover == true) {
-				//System.out.println(gameover);
 				winner = true;
 				break;
 			}

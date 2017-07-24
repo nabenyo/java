@@ -2,21 +2,32 @@ package benyon_p1;
 
 import java.util.Scanner;
 
+/**
+ * P1 class used to play a game of Tic-tac-toe. Formatting, loop execution, and 
+ * game board formatting all handled in this class. Game-board manipulation
+ * and logic for testing rows/cols/diagonals for wins found in TicTacToe class
+ * @author Nick Benyo
+ *
+ */
 public class P1 {
-	private static int owins = 0;
-	private static int xwins = 0;
-	private static int ties = 0;
+	//data members below used for the game stats
+	private static int owins = 0;//Score for O
+	private static int xwins = 0;//Score for X
+	private static int ties = 0;//Score for ties
+	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		@SuppressWarnings("resource")
+		Scanner playmore = new Scanner(System.in);
 		String keepPlaying = "y";
+		//Player must select y to continue with each game end
 		while(keepPlaying.equals("y")) {
 			gamePlay();
 			System.out.printf("\nGame Stats\nX has %d wins"
 					+ "\nO has %d wins\nThere have been %d ties\n"
 					, xwins, owins, ties);
-			System.out.print("\nDo you want to play again?\n");
-			keepPlaying = scanner.nextLine();
+			System.out.print("\nDo you want to play again? (y for yes) ");
+			keepPlaying = playmore.nextLine();//Ask player to keep playing
 		}
 		System.out.print("Thank you for playing!");
 	}
@@ -28,28 +39,31 @@ public class P1 {
 	 */
 	public static void gamePlay() {
 		TicTacToe array = new TicTacToe();
-		int size = array.getBoard().length;
-		int numberofsquares = size * size;
+		int size = array.getBoardSize();
+		int numofsquares = size * size;//Counts number of spaces in game
 		String gameWinner = "Tie";
 		int rounds = 0;
 		boolean over = false;
-		while(over == false) {
+		while(!over && rounds < numofsquares) {
 			over = turn(array, "X");
-			if(over == true) {
+			if(over) {
 				gameWinner = "X";
 				break;
 			}
 			rounds++;
-			if(rounds == numberofsquares) {
+			//If statement below kills game when all spaces have been filled.
+			//Moves are odd number of moves and must terminate mid-loop if tie
+			if(rounds == numofsquares) {
 				break;
 			}
 			over = turn(array, "O");
-			if(over == true) {
+			if(over) {
 				gameWinner = "O";
 				break;
 			}
 			rounds++;
 		}
+		//If statement to track wins below at end of each game
 		if(gameWinner == "O") {
 			owins += 1;
 		}else if(gameWinner == "X") {
@@ -57,13 +71,14 @@ public class P1 {
 		}else {
 			ties += 1;
 		}
-		printBoard(array.getBoard());
+		printBoard(array.getBoard());//Ensure the board is printed on win
 		if(gameWinner!="Tie") {
 			System.out.printf("%s wins the game!\n", gameWinner);
 		}else{
 			System.out.print("No one wins, it's a tie!\n");
 			}
 	}
+	
 	/**
 	 * Executes a full turn of the game, printing the board and calling
 	 * the aPlayerMove method to record a move from the player
@@ -87,25 +102,28 @@ public class P1 {
 	 */
 	public static void aPlayerMove(TicTacToe gameboard, String player) {
 		boolean correctAnswer = false;
-			while(correctAnswer == false) {
-				Scanner scanner = new Scanner(System.in);
-				System.out.print("Which row?");
-				int row = scanner.nextInt();
+			//correctAnswer returns a boolean if valid, loop terminates
+			//as soon as the player selects a valid move
+			while(!correctAnswer) {
+				System.out.print("Which row? ");
+				int row = scanner.nextInt();//Reads in player row choice
+				//While loop ensures player selects values in range of array
 				while(row >= gameboard.getBoard().length||row<0) {
 					System.out.println("\nThat number isn't on the board! "
-							+ "Please try again\n");
+							+ "Please try again ");
 					row = scanner.nextInt();
 				}
-				System.out.print("Which column?");
+				System.out.print("Which column? ");
 				int column = scanner.nextInt();
 				while(column >= gameboard.getBoard().length||column<0) {
 					System.out.println("\nThat number isn't on the board! "
-							+ "Please try again\n");
+							+ "Please try again ");
 					column = scanner.nextInt();
 				}
 				correctAnswer = gameboard.playerMove(row, column, player);
 			}
 	}
+	
 	/**
 	 * Method for printing a TicTacToe game-board array in a terminal in
 	 * a terminal optimized format
@@ -122,8 +140,6 @@ public class P1 {
 			//If statement to start a new line with each new row
 			if(row>0) {
 				System.out.println();}
-			//Create totaled variable
-			int total = 0;
 			//Loop through each value in the array
 			for (int col = 0; col < lenvar; col++) {
 				//Create indent with each row for diagonals total
