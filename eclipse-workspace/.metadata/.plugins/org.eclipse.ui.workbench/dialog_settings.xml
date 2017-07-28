@@ -18,6 +18,8 @@
 	<section name="ZipFileImportWizard">
 		<item value="false" key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="/home/nick/Desktop/benyon_lab5.zip"/>
+			<item value="/home/nick/Documents/benyon_p1.zip"/>
 			<item value="/home/nick/Desktop/benyon_lab3.zip"/>
 		</list>
 	</section>
@@ -25,6 +27,8 @@
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID"/>
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="/home/nick/Desktop/benyon_lab5.zip"/>
+			<item value="/home/nick/Desktop/benyon_lab4.zip"/>
 			<item value="/home/nick/Desktop/benyon_lab3.zip"/>
 			<item value="/home/nick/Desktop/benyon_lab2.zip"/>
 			<item value="/home/nick/Desktop/benyon_lab1.zip"/>
